@@ -98,7 +98,7 @@ for(let i=0; i<randomValues.length; i++){
   }
 }
 
-console.log(`As primeiras 4 strings são ${strings[0]}, ${strings[1]}, ${strings[2]} e ${strings[3]}`)
+console.log(`As primeiras 4 strings são ${strings.join(', ').replace(`, ${strings[strings.length -1]}`, ` e ${strings[strings.length -1]}`)}`)
 console.log(`Até que as primeiras 4 strings fossem iteradas, ${qntBoolean} booleanos foram iterados`)
 console.log(`O array foi iterado por ${ultimoIndice+1} vezes`)
 /*
