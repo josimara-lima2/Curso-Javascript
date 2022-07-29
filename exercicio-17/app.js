@@ -5,17 +5,32 @@
 */
   const form = document.querySelector('form')
   const patternInput = /^[a-zA-Z0-9]{7,11}$/
-  form.addEventListener('submit', event => {
+
+  const clearInput = () => {
+    input.value = ''
+    input.focus()
+  }
+
+  const logMessage = message => {
+    console.log(message)
+    clearInput()
+  }
+
+  const handleSubmit = event => {
     event.preventDefault()
-    const valueInput = event.target.input.value
-    const resultRegex = patternInput.test(valueInput)
+    const input = event.target.input
+    const resultRegex = patternInput.test(input.value)
     if(resultRegex){
-      console.log('O valor inserido no input é válido =)')
+     
+      logMessage('O valor inserido no input é válido =)')
+      return
     }else{
-      console.log('Valor inválido =(')
+      logMessage('Valor inválido =(')
     }
     
-  })
+  }
+
+  form.addEventListener('submit',handleSubmit )
 /*
   02
 
@@ -30,9 +45,9 @@
     index.html;
   - Exiba no console o boolean no qual este teste resulta.
 */
-const palavra = document.querySelector('a')
-const pattern = /^documentation$/
-const result = pattern.test(palavra.textContent.trim())
+const palavra = document.querySelector('p')
+const pattern = /documentation/
+const result = pattern.test(palavra.textContent)
 console.log('result',result)
 /*
   04
@@ -43,7 +58,7 @@ console.log('result',result)
 */
 
 const B99message = 'E o Terry Crews faz tudo, inclusive tocar a abertura de B99 na flauta'
-const patternB99 = /[B-Z0-9]{3,3}/
+const patternB99 = /[A-Z0-9]{3}/
 const resultB99 = patternB99.test(B99message)
 console.log(resultB99)
 /*
