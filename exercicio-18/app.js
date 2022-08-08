@@ -25,19 +25,36 @@ const form = document.querySelector('form')
 const testUsername = username => /^[a-zA-Z]{6,}$/.test(username)
 const paragrafh = document.createElement('p');
 form.username.insertAdjacentElement('afterend', paragrafh)
-form.username.addEventListener('keyup', event => {
-  console.log(event.target.value)
+
+function paragrafhEdit(text, className,paragrafh){
+  paragrafh.textContent = text
+  paragrafh.setAttribute('class', className)
+}
+
+const validUsername = {
+  message: 'Username válido =)',
+  className: 'username-success-feedback'
+}
+
+const invalidUsername = {
+  message: 'O valor deve conter no mínimo 6 caracteres, com apenas letras maiúsculas e/ou minúsculas',
+  className: 'username-help-feedback'
+}
 
 
-  const isAValidUsername = testUsername(event.target.value)
-  if (isAValidUsername) {
-
-    paragrafh.textContent = 'Username válido =)'
-    paragrafh.setAttribute('class', 'username-success-feedback')
+function isAValidUserNameParagrafh(paragrafh, isAValid,objValid, objInvalid){
+  if(isAValid){
+    paragrafhEdit(objValid.message,objValid.className,paragrafh)
     return
   }
-  paragrafh.textContent = 'O valor deve conter no mínimo 6 caracteres, com apenas letras maiúsculas e/ou minúsculas'
-  paragrafh.setAttribute('class', 'username-help-feedback')
+  paragrafhEdit(objInvalid.message,objInvalid.className,paragrafh)
+ 
+}
+
+form.username.addEventListener('keyup', event => {
+
+  const isAValidUsername = testUsername(event.target.value)
+  isAValidUserNameParagrafh(paragrafh, isAValidUsername,validUsername,invalidUsername)
 })
 
 /*
@@ -53,16 +70,23 @@ form.username.addEventListener('keyup', event => {
 */
 const paragrafhForm = document.createElement('p');
 form.insertAdjacentElement('beforeend', paragrafhForm)
+
+const valid = {
+  message:'Dados Enviados =)',
+  className:'submit-success-feedback'
+}
+
+const invalid = {
+  message:'Por favor, insira um username válido',
+  className:'submit-help-feedback'
+}
+
+
+
 form.addEventListener('submit', event => {
   event.preventDefault()
   const isAValidUsername = testUsername(event.target.username.value)
-  if (isAValidUsername) {
-    paragrafhForm.textContent = 'Dados Enviados =)'
-    paragrafhForm.setAttribute('class', 'submit-success-feedback')
-    return
-  }
-  paragrafhForm.textContent = 'Por favor, insira um username válido'
-  paragrafhForm.setAttribute('class', 'submit-help-feedback')
+  isAValidUserNameParagrafh(paragrafhForm, isAValidUsername,valid,invalid)
 })
 /*
   03
