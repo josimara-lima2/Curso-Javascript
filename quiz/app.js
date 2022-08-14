@@ -1,7 +1,10 @@
-const correctAnswers = ['B','B','B','B']
+const correctAnswers = ['C','B','B','D']
 const form = document.querySelector('.quiz-form')
 const finalResult = document.querySelector('.result')
-form.addEventListener('submit', event => {
+
+
+
+const callbackSubmit = event => {
     event.preventDefault()
     let score = 0
     const userAnswers = [
@@ -31,4 +34,5 @@ form.addEventListener('submit', event => {
         counter++
        
     },10)
-})
+}
+form.addEventListener('submit',callbackSubmit)
